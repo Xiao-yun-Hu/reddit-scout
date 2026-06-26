@@ -3,7 +3,7 @@ name: reddit-scout
 version: "1.0.0"
 description: "Crawl Reddit subreddits via RSS and generate scored unmet-needs opportunity clusters. No API key required. Use to find market gaps, validate demand signals, or surface trending pain points."
 argument-hint: "reddit-scout unmet needs in B2B tools | reddit-scout AI productivity | reddit-scout --preset=consumer"
-allowed-tools: Bash, Read, Write
+allowed-tools: Bash, Read
 user-invocable: true
 metadata:
   openclaw:

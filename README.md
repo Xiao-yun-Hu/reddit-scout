@@ -1,6 +1,6 @@
 # reddit-scout
 
-A Claude Code skill that crawls Reddit subreddits via public RSS feeds and generates a scored **unmet-needs opportunity report** — no API key, no authentication required.
+An AI agent skill that crawls Reddit subreddits via public RSS feeds and generates a scored **unmet-needs opportunity report** — no API key, no authentication required.
 
 ## What it does
 
@@ -72,13 +72,14 @@ Reddit exposes public RSS/Atom feeds that require no authentication:
 https://www.reddit.com/r/{subreddit}/top.rss?t=month&limit=25
 ```
 
-The script parses these feeds, strips HTML from post bodies, and emits clean JSON. A configurable delay between requests (default 4s) keeps it well within Reddit's rate limits.
+The script parses these feeds, strips HTML from post bodies, and emits clean JSON. A configurable delay between requests (default **8s**) reduces the chance of hitting Reddit's rate limits. If you see frequent 429 errors, increase `--delay` to 12–15s or spread requests across sessions.
 
 The JSON output shape:
 
 ```json
 {
   "subreddits": ["SomebodyMakeThis", "sideproject"],
+  "errors": [{"sub": "SaaS", "error": "HTTP 429: Too Many Requests"}],
   "sort": "top",
   "time_range": "month",
   "post_count": 50,
@@ -295,6 +296,13 @@ Posts analyzed: {N} · Clusters found: {N} · Skipped (noise/meta): {N}
 
 ---
 
+## Privacy & data
+
+- Only accesses **public Reddit RSS feeds** — no login, no Reddit account, no OAuth
+- Does not collect, store, or transmit any personal data
+- No credentials of any kind are required or used
+- Network access is limited to one endpoint: `reddit.com` RSS feeds
+
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE)
